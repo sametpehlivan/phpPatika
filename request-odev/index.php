@@ -17,26 +17,29 @@
                 return $value%$mod;
             }
             $mod = 3;
-            if($_POST['sayi'] != '')
+            if (!empty($_POST['sayi']))
             {
-                $sayi = is_numeric($_POST['sayi']) ? doubleval($_POST['sayi']) : null;
-                if (!is_null($sayi))
+                if($_POST['sayi'] != '')
                 {
-                    $kalan = check_mod($sayi,$mod);
-                    if ($kalan != 0)
+                    $sayi = is_numeric($_POST['sayi']) ? doubleval($_POST['sayi']) : null;
+                    if (!is_null($sayi))
                     {
-                        $onceki_fark = $sayi-floor($sayi/$mod)*$mod;
-                        $sonraki_fark = (floor($sayi/$mod)+1)*$mod-$sayi;
-                        $en_yakin_deger = 0;
-                        if ($onceki_fark < $sonraki_fark) $en_yakin_deger =  $sayi - $onceki_fark;
-                        else $en_yakin_deger =  $sayi + $sonraki_fark;
-                        echo  "<span style='color: red'>".$mod."'a tam bölünemiyor.En yakın değer ".$en_yakin_deger."</span>";
+                        $kalan = check_mod($sayi,$mod);
+                        if ($kalan != 0)
+                        {
+                            $onceki_fark = $sayi-floor($sayi/$mod)*$mod;
+                            $sonraki_fark = (floor($sayi/$mod)+1)*$mod-$sayi;
+                            $en_yakin_deger = 0;
+                            if ($onceki_fark < $sonraki_fark) $en_yakin_deger =  $sayi - $onceki_fark;
+                            else $en_yakin_deger =  $sayi + $sonraki_fark;
+                            echo  "<span style='color: red'>".$mod."'a tam bölünemiyor.En yakın değer ".$en_yakin_deger."</span>";
+                        }
+                        else echo "<span style='color: green'>".$mod."'a tam bölünüyor"."</span>";
                     }
-                    else echo "<span style='color: green'>".$mod."'a tam bölünüyor"."</span>";
+                    else echo  "<span style='color: red'>Geçersiz değer</span>";
                 }
-                else echo  "<span style='color: red'>Geçersiz değer</span>";
+                else echo  "<span style='color: red'>Boş değer</span>";
             }
-            else echo  "<span style='color: red'>Boş değer</span>";
 
 
 
